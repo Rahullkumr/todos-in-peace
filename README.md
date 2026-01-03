@@ -1,2 +1,3 @@
 # browser-homepage
-Browser homepage using html
+
+A peaceful todo webapp using React, Chakra UI, Local Storage, Vite and Bun.
