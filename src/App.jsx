@@ -139,18 +139,15 @@ const App = () => {
       {/* Digital Clock */}
       <Flex
         position="fixed"
-        bottom="30px"
+        bottom="20px"
         left="50%"
         transform="translateX(-50%)"
-        bg="blackAlpha.700"
-        backdropFilter="blur(15px)"
-        px={8}
-        py={3}
-        borderRadius="3xl"
-        border="1px solid"
-        borderColor="whiteAlpha.300"
+        bg="blackAlpha.600"
+        px={5}
+        py={2}
+        borderRadius="full"
       >
-        <Text color="white" fontFamily="monospace" fontSize="2xl" fontWeight="bold">
+        <Text color="white" fontFamily="monospace" fontSize="xl">
           {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
         </Text>
       </Flex>
