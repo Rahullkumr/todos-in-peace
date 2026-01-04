@@ -158,18 +158,14 @@ const App = () => {
       {/* Play/Pause Button */}
       <IconButton
         position="fixed"
-        bottom="30px"
+        bottom="28px"
         right="30px"
-        borderRadius="full"
-        size="lg"
-        bg="whiteAlpha.200"
-        backdropFilter="blur(10px)"
+        size="sm"
+        bg="transparent"
         color="white"
         onClick={toggleVideo}
-        aria-label="Toggle Video"
-        _hover={{ bg: "whiteAlpha.400" }}
       >
-        {isPlaying ? <Pause size={24} fill="white" /> : <Play size={24} fill="white" />}
+        {isPlaying ? <Pause size={24} /> : <Play size={24} />}
       </IconButton>
     </Box>
   );
