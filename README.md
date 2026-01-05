@@ -1,7 +1,11 @@
 # browser-homepage
 
-A peaceful todo webapp using React, Chakra UI, Local Storage, Vite and Bun.
+A peaceful todo webapp with a video background.
 
 ## Techs used:
 
 - React
+- Chakra UI
+- Local Storage
+- Vite
+- Bun
