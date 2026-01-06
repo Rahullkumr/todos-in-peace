@@ -2,7 +2,7 @@
 
 A peaceful todo webapp with a video background.
 
-## Techs used:
+## Technologies used:
 
 - React
 - Chakra UI
