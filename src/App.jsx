@@ -85,13 +85,13 @@ const App = () => {
       />
 
       {/* Task UI */}
-      <Container maxW="md" pt="12vh" zIndex="1">
+      <Container maxW="md" pt="7vh" zIndex="1">
         <VStack gap={6}>
           <Input
             placeholder="Add a new task..."
-            bg="whiteAlpha.900"
-            color="gray.800"
-            _placeholder={{ color: 'gray.500' }}
+            // bg="whiteAlpha.900"
+            // color="gray.800"
+            _placeholder={{ color: 'black' }}
             borderRadius="full"
             size="xl"
             px={8}
@@ -99,7 +99,7 @@ const App = () => {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={addTodo}
             textAlign="center"
-            boxShadow="2xl"
+            boxShadow="xs"
             border="none"
           />
 
