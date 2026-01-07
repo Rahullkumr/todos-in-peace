@@ -85,13 +85,13 @@ const App = () => {
       />
 
       {/* Task UI */}
-      <Container maxW="md" pt="7vh" zIndex="1">
+      <Container maxW="xl" pt="7vh" zIndex="1">
         <VStack gap={6}>
           <Input
-            placeholder="Add a new task..."
+            placeholder="Add a new task"
             // bg="whiteAlpha.900"
             // color="gray.800"
-            _placeholder={{ color: 'black' }}
+            _placeholder={{ color: 'white' }}
             borderRadius="full"
             size="xl"
             px={8}
@@ -142,7 +142,8 @@ const App = () => {
         bottom="20px"
         left="50%"
         transform="translateX(-50%)"
-        bg="blackAlpha.600"
+        // bg="blackAlpha.600"
+        shadow="sm"
         px={5}
         py={2}
         borderRadius="full"
