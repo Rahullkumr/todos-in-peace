@@ -86,7 +86,7 @@ const App = () => {
 
       {/* Task UI */}
       <Container maxW="xl" pt="7vh" zIndex="1">
-        <VStack gap={6}>
+        <VStack gap={5}>
           <Input
             placeholder="Add a new task"
             // bg="whiteAlpha.900"
@@ -107,26 +107,24 @@ const App = () => {
             {todos.map((todo, index) => (
               <List.Item
                 key={`${todo}-${index}`}
-                bg="blackAlpha.500"
-                backdropFilter="blur(12px)"
+                bg="blackAlpha.100"
+                backdropFilter="blur(6px)"
                 px={5}
-                py={3}
+                py={2}
                 borderRadius="xl"
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
-                color="white"
-                border="1px solid"
-                borderColor="whiteAlpha.200"
+                color="black"
+                border="none"
               >
                 <Text fontWeight="medium">{todo}</Text>
                 <IconButton
-                  aria-label="Delete"
-                  variant="ghost"
-                  color="red.300"
+                  color="red"
+                  bg="transparent"
                   size="sm"
                   onClick={() => removeTodo(index)}
-                  _hover={{ bg: "red.500", color: "white" }}
+                  _hover={{ bg: "transparent" }}
                 >
                   <X size={18} />
                 </IconButton>
