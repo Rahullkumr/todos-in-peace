@@ -1,4 +1,4 @@
-# browser-homepage
+# Peaceful Todos
 
 A peaceful todo webapp with a video background.
 
@@ -9,3 +9,5 @@ A peaceful todo webapp with a video background.
 - Local Storage
 - Vite
 - Bun
+
+Click [here](https://todos-in-peace.vercel.app/)
