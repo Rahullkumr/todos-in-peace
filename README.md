@@ -10,4 +10,8 @@ A peaceful todo webapp with a video background.
 - Vite
 - Bun
 
-Click [here](https://todos-in-peace.vercel.app/)
+Click [here](https://todos-in-peace.vercel.app/) and enjoy.
+
+<br />
+
+![todo](todo.png)
