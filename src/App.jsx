@@ -120,9 +120,22 @@ const App = () => {
       />
 
       {/* Task UI */}
-      <Container maxW="xl" pt="4vh" zIndex="1">
-        <VStack gap={5}>
-          <SimpleGrid columns={{ base: 1, md: 2 }} gap={5} w="100%">
+      <Container
+        maxW="100%"
+        px={{ base: 4, md: 10 }}
+        pt="4vh"
+        pb="100px"
+        zIndex="1"
+        h="100vh"
+        overflowY="auto"
+        overflowX="hidden"
+        css={{
+          scrollbarWidth: 'none',
+          '&::-webkit-scrollbar': { display: 'none' }
+        }}
+      >
+        <VStack gap={5} pt="14px">
+          <SimpleGrid minChildWidth="240px" gap={5} w="100%" alignItems="start">
             {todos.map((todo, index) => (
               <Box
                 key={`${todo}-${index}`}
@@ -198,12 +211,14 @@ const App = () => {
           size="lg"
           px={6}
           w="320px"
+          maxW="45%"
+          minW="0"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={addTodo}
           color="white"
-          cursor="text"
-          boxShadow="xs"
+          cursor="default"
+          boxShadow="sm"
           border="none"
         />
 
