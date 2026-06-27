@@ -6,8 +6,7 @@ import {
   IconButton,
   Text,
   Flex,
-  VStack,
-  SimpleGrid
+  VStack
 } from '@chakra-ui/react';
 import { Play, Pause, X } from 'lucide-react';
 
@@ -135,11 +134,17 @@ const App = () => {
         }}
       >
         <VStack gap={5} pt="14px">
-          <SimpleGrid minChildWidth="240px" gap={5} w="100%" alignItems="start">
+          <Box
+            w="100%"
+            css={{ columnWidth: '240px', columnGap: '20px' }}
+          >
             {todos.map((todo, index) => (
               <Box
                 key={`${todo}-${index}`}
                 position="relative"
+                display="inline-block"
+                w="100%"
+                mb={6}
                 bg={stickyColors[index % stickyColors.length]}
                 color="gray.800"
                 minH="120px"
@@ -150,6 +155,7 @@ const App = () => {
                 boxShadow="0 6px 14px rgba(0,0,0,0.35)"
                 transform={`rotate(${tilts[index % tilts.length]}deg)`}
                 transition="transform 0.15s ease, box-shadow 0.15s ease"
+                css={{ breakInside: 'avoid' }}
                 _hover={{
                   transform: 'rotate(0deg) scale(1.03)',
                   boxShadow: '0 10px 22px rgba(0,0,0,0.4)',
@@ -188,7 +194,7 @@ const App = () => {
                 </Text>
               </Box>
             ))}
-          </SimpleGrid>
+          </Box>
         </VStack>
       </Container>
 
