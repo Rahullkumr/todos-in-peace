@@ -11,7 +11,11 @@ A peaceful todo webapp with a video background.
 - Bun
 
 Click [here](https://todos-in-peace.vercel.app/) and enjoy.
-
 <br />
+
+## Latest
+![todo](masonStyling.png)
+
+## Old
 
 ![todo](todo.png)

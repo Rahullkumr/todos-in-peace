@@ -49,7 +49,9 @@ const Thumbtack = ({ size = 26 }) => (
 const App = () => {
   const [todos, setTodos] = useState(() => {
     const savedTodos = localStorage.getItem('todos');
-    return savedTodos ? JSON.parse(savedTodos) : [];
+    const parsed = savedTodos ? JSON.parse(savedTodos) : [];
+    // Normalize any legacy object-form todos ({ text, createdAt }) back to strings
+    return parsed.map((t) => (typeof t === 'string' ? t : t.text));
   });
 
   const [inputValue, setInputValue] = useState('');
@@ -93,6 +95,17 @@ const App = () => {
 
   return (
     <Box position="relative" h="100vh" w="100vw" overflow="hidden">
+      {/* Pushpin gloss-sweep animation (plain CSS for reliable keyframes) */}
+      <style>{`
+        @keyframes pinShine {
+          0%   { left: -150%; }
+          100% { left: 180%; }
+        }
+        .sticky-card:hover .pin-shine {
+          animation: pinShine 1.2s ease-out;
+        }
+      `}</style>
+
       {/* Background Video */}
       <video
         ref={videoRef}
@@ -141,6 +154,7 @@ const App = () => {
             {todos.map((todo, index) => (
               <Box
                 key={`${todo}-${index}`}
+                className="sticky-card"
                 position="relative"
                 display="inline-block"
                 w="100%"
@@ -171,6 +185,28 @@ const App = () => {
                   zIndex={2}
                 >
                   <Thumbtack size={26} />
+                  {/* Gloss sweep clipped to the round pin head */}
+                  <Box
+                    position="absolute"
+                    top="1px"
+                    left="5px"
+                    w="16px"
+                    h="16px"
+                    borderRadius="full"
+                    overflow="hidden"
+                    pointerEvents="none"
+                  >
+                    <Box
+                      className="pin-shine"
+                      position="absolute"
+                      top="0"
+                      left="-150%"
+                      w="70%"
+                      h="100%"
+                      transform="skewX(-20deg)"
+                      bg="linear-gradient(90deg, transparent, rgba(255,255,255,0.95), transparent)"
+                    />
+                  </Box>
                 </Box>
                 <IconButton
                   position="absolute"
