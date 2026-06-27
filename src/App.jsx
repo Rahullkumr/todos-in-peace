@@ -120,22 +120,8 @@ const App = () => {
       />
 
       {/* Task UI */}
-      <Container maxW="xl" pt="1vh" zIndex="1">
+      <Container maxW="xl" pt="4vh" zIndex="1">
         <VStack gap={5}>
-          <Input
-            placeholder="Add a new task"
-            _placeholder={{ color: 'white' }}
-            borderRadius="full"
-            size="xl"
-            px={8}
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={addTodo}
-            textAlign="center"
-            boxShadow="xs"
-            border="none"
-          />
-
           <SimpleGrid columns={{ base: 1, md: 2 }} gap={5} w="100%">
             {todos.map((todo, index) => (
               <Box
@@ -193,34 +179,51 @@ const App = () => {
         </VStack>
       </Container>
 
-      {/* Digital Clock */}
+      {/* Bottom Bar: input (left), clock (center), play/pause (right) */}
       <Flex
         position="fixed"
         bottom="20px"
-        left="50%"
-        transform="translateX(-50%)"
-        shadow="sm"
-        px={5}
-        py={2}
-        borderRadius="full"
+        left="0"
+        w="100%"
+        px="30px"
+        align="center"
+        justify="space-between"
+        zIndex="2"
       >
-        <Text color="white" fontFamily="monospace" fontSize="xl">
-          {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-        </Text>
-      </Flex>
+        {/* Input - left */}
+        <Input
+          placeholder="Add a new task"
+          _placeholder={{ color: 'white' }}
+          borderRadius="full"
+          size="lg"
+          px={6}
+          w="320px"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={addTodo}
+          color="white"
+          cursor="text"
+          boxShadow="xs"
+          border="none"
+        />
 
-      {/* Play/Pause Button */}
-      <IconButton
-        position="fixed"
-        bottom="28px"
-        right="30px"
-        size="sm"
-        bg="transparent"
-        color="white"
-        onClick={toggleVideo}
-      >
-        {isPlaying ? <Pause size={24} /> : <Play size={24} />}
-      </IconButton>
+        {/* Clock - center */}
+        <Flex shadow="sm" px={5} py={2} borderRadius="full">
+          <Text color="white" fontFamily="monospace" fontSize="xl">
+            {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          </Text>
+        </Flex>
+
+        {/* Play/Pause - right */}
+        <IconButton
+          size="sm"
+          bg="transparent"
+          color="white"
+          onClick={toggleVideo}
+        >
+          {isPlaying ? <Pause size={24} /> : <Play size={24} />}
+        </IconButton>
+      </Flex>
     </Box>
   );
 };
