@@ -50,8 +50,8 @@ const App = () => {
   const [todos, setTodos] = useState(() => {
     const savedTodos = localStorage.getItem('todos');
     const parsed = savedTodos ? JSON.parse(savedTodos) : [];
-    // Normalize any legacy object-form todos ({ text, createdAt }) back to strings
-    return parsed.map((t) => (typeof t === 'string' ? t : t.text));
+    // Normalize legacy string todos into { text, createdAt } (no known date)
+    return parsed.map((t) => (typeof t === 'string' ? { text: t, createdAt: null } : t));
   });
 
   const [inputValue, setInputValue] = useState('');
@@ -70,7 +70,7 @@ const App = () => {
 
   const addTodo = (e) => {
     if (e.key === 'Enter' && inputValue.trim()) {
-      setTodos((prev) => [...prev, inputValue.trim()]);
+      setTodos((prev) => [...prev, { text: inputValue.trim(), createdAt: Date.now() }]);
       setInputValue('');
     }
   };
@@ -153,7 +153,7 @@ const App = () => {
           >
             {todos.map((todo, index) => (
               <Box
-                key={`${todo}-${index}`}
+                key={`${todo.text}-${index}`}
                 className="sticky-card"
                 position="relative"
                 display="inline-block"
@@ -164,7 +164,7 @@ const App = () => {
                 minH="120px"
                 px={4}
                 pt={5}
-                pb={4}
+                pb={todo.createdAt ? 8 : 4}
                 borderRadius="2px"
                 boxShadow="0 6px 14px rgba(0,0,0,0.35)"
                 transform={`rotate(${tilts[index % tilts.length]}deg)`}
@@ -226,8 +226,26 @@ const App = () => {
                   whiteSpace="pre-wrap"
                   wordBreak="break-word"
                 >
-                  {todo}
+                  {todo.text}
                 </Text>
+                {/* Handwritten date in the bottom corner */}
+                {todo.createdAt && (
+                  <Text
+                    position="absolute"
+                    bottom="8px"
+                    right="12px"
+                    fontSize="xs"
+                    color="gray.600"
+                    fontFamily="'Comic Sans MS', 'Segoe Print', cursive"
+                    transform="rotate(-2deg)"
+                  >
+                    {new Date(todo.createdAt).toLocaleDateString([], {
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric'
+                    })}
+                  </Text>
+                )}
               </Box>
             ))}
           </Box>

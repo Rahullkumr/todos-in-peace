@@ -2,6 +2,10 @@
 
 A peaceful todo webapp with a video background.
 
+## Todo
+
+- add db storage of todos
+
 ## Technologies used:
 
 - React
