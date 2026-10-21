@@ -4,7 +4,7 @@ A peaceful todo webapp with a video background.
 
 ## Todo
 
-- add db storage of todos
+- add cloud db storage of todos
 
 ## Technologies used:
 

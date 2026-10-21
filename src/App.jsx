@@ -9,6 +9,8 @@ import {
   VStack
 } from '@chakra-ui/react';
 import { Play, Pause, X } from 'lucide-react';
+import { useLiveQuery } from 'dexie-react-hooks';
+import { db } from './db';
 
 // Realistic thumbtack drawn as an SVG (head viewed slightly from above)
 const Thumbtack = ({ size = 26 }) => (
@@ -47,12 +49,8 @@ const Thumbtack = ({ size = 26 }) => (
 );
 
 const App = () => {
-  const [todos, setTodos] = useState(() => {
-    const savedTodos = localStorage.getItem('todos');
-    const parsed = savedTodos ? JSON.parse(savedTodos) : [];
-    // Normalize legacy string todos into { text, createdAt } (no known date)
-    return parsed.map((t) => (typeof t === 'string' ? { text: t, createdAt: null } : t));
-  });
+  // Re-renders automatically whenever the todos table changes
+  const todos = useLiveQuery(() => db.todos.toArray(), [], []);
 
   const [inputValue, setInputValue] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
@@ -64,19 +62,15 @@ const App = () => {
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
-
   const addTodo = (e) => {
     if (e.key === 'Enter' && inputValue.trim()) {
-      setTodos((prev) => [...prev, { text: inputValue.trim(), createdAt: Date.now() }]);
+      db.todos.add({ text: inputValue.trim(), createdAt: Date.now() });
       setInputValue('');
     }
   };
 
-  const removeTodo = (index) => {
-    setTodos((prev) => prev.filter((_, i) => i !== index));
+  const removeTodo = (id) => {
+    db.todos.delete(id);
   };
 
   // Sticky note colors + slight tilt for a hand-placed look
@@ -153,7 +147,7 @@ const App = () => {
           >
             {todos.map((todo, index) => (
               <Box
-                key={`${todo.text}-${index}`}
+                key={todo.id}
                 className="sticky-card"
                 position="relative"
                 display="inline-block"
@@ -215,7 +209,7 @@ const App = () => {
                   color="gray.600"
                   bg="transparent"
                   size="xs"
-                  onClick={() => removeTodo(index)}
+                  onClick={() => removeTodo(todo.id)}
                   _hover={{ bg: 'transparent', color: 'red.500' }}
                 >
                   <X size={16} />
