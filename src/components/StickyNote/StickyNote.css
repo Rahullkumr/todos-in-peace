@@ -1,0 +1,9 @@
+/* Pushpin gloss-sweep animation (plain CSS for reliable keyframes) */
+@keyframes pinShine {
+  0%   { left: -150%; }
+  100% { left: 180%; }
+}
+
+.sticky-card:hover .pin-shine {
+  animation: pinShine 1.2s ease-out;
+}
